@@ -1,10 +1,15 @@
 import Head from 'next/head'
-
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
-import { Button } from '@mantine/core'
+import { Button, Navbar, Stack, Tooltip } from '@mantine/core'
 import { Main } from 'src/components/Main';
+
+
+const NAV_ITEMS = [
+  {href: "/", label: "Index"},
+  {href: "/dashboard", label: "Dashboard"},
+];
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,8 +22,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      <Main inter={inter}/>
+      <header className={styles.header}>
+      {NAV_ITEMS.map(item => {
+        return (
+          <Link href={item.href} className={styles.link}>
+            {item.label}
+          </Link>
+        );
+      })
+      }
+      </header>
+
+      <Main page="index" inter={inter} />
     </>
   )
 }
